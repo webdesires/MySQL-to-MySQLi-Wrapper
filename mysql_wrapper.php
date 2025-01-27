@@ -22,51 +22,71 @@
 $global_connection = null;
 
 function mysql_connect($address, $user, $password) {
-  global $global_connection;
-  $global_connection = mysqli_connect($address, $user, $password);
-  return $global_connection;
+    global $global_connection;
+    $global_connection = mysqli_connect($address, $user, $password);
+    return $global_connection;
 }
 
 function mysql_select_db($dbname, $connection = null) {
-  global $global_connection;
-  $connection = $connection ?: $global_connection;
-  return mysqli_select_db($connection, $dbname);
+    global $global_connection;
+    $connection = $connection ?: $global_connection;
+    return mysqli_select_db($connection, $dbname);
 }
 
 function mysql_query($query, $connection = null) {
-  global $global_connection;
-  $connection = $connection ?: $global_connection;
-  return mysqli_query($connection, $query);
+    global $global_connection;
+    $connection = $connection ?: $global_connection;
+    return mysqli_query($connection, $query);
 }
 
 function mysql_fetch_assoc($result) {
-  return mysqli_fetch_assoc($result);
+    return mysqli_fetch_assoc($result);
+}
+
+function mysql_fetch_array($result, $resulttype = MYSQLI_BOTH) {
+    return mysqli_fetch_array($result, $resulttype);
+}
+
+function mysql_fetch_row($result) {
+    return mysqli_fetch_row($result);
 }
 
 function mysql_num_rows($result) {
-  return mysqli_num_rows($result);
+    return mysqli_num_rows($result);
+}
+
+function mysql_affected_rows($connection = null) {
+    global $global_connection;
+    $connection = $connection ?: $global_connection;
+    return mysqli_affected_rows($connection);
+}
+
+function mysql_close($connection = null) {
+    global $global_connection;
+    $connection = $connection ?: $global_connection;
+    return mysqli_close($connection);
 }
 
 function mysql_result($result, $row, $field = 0) {
-  mysqli_data_seek($result, $row);
-  $data = mysqli_fetch_array($result);
-  return $data[$field];
+    mysqli_data_seek($result, $row);
+    $data = mysqli_fetch_array($result);
+    return $data[$field];
 }
 
 function mysql_error($connection = null) {
-  global $global_connection;
-  $connection = $connection ?: $global_connection;
-  return mysqli_error($connection);
+    global $global_connection;
+    $connection = $connection ?: $global_connection;
+    return mysqli_error($connection);
 }
 
 function mysql_real_escape_string($string, $connection = null) {
-  global $global_connection;
-  $connection = $connection ?: $global_connection;
-  return mysqli_real_escape_string($connection, $string);
+    global $global_connection;
+    $connection = $connection ?: $global_connection;
+    return mysqli_real_escape_string($connection, $string);
 }
 
 function mysql_insert_id($connection = null) {
-  global $global_connection;
-  $connection = $connection ?: $global_connection;
-  return mysqli_insert_id($connection);
+    global $global_connection;
+    $connection = $connection ?: $global_connection;
+    return mysqli_insert_id($connection);
 }
